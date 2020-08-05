@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Recipe from './recipe'
+import Recipe from './Recipe'
 import './App.css';
 
 const App = () => {
@@ -16,17 +16,11 @@ const App = () => {
       const response = await fetch(`https://api.edamam.com/search?q=${keyword}&app_id=${APP_ID}&app_key=${KEY}`);
       const data = await response.json();
       setrecipes(data.hits);
-      console.log(data.hits);
     }
     getApi();
   }, [keyword])
 
-
-
-  const getSearch = e => {
-    setSearch(e.target.value);
-    console.log(search);
-  }
+  const getSearch = e => setSearch(e.target.value);
 
   const getKeyword = e => {
     e.preventDefault();
@@ -34,12 +28,11 @@ const App = () => {
     setSearch('');
   }
 
-
   return (
     <div className="App">
       <h1>Hello Recipe!</h1>
       <form onSubmit={getKeyword} className='search-form'>
-        <input type="text" className='search-bar' value={search} onChange={getSearch} />
+        <input type="text" className='search-bar' value={search} onChange={getSearch} placeholder='Type food-word here...' />
         <button type='submit' className='search-button'>Search</button>
       </form>
       <div className="recipes">
